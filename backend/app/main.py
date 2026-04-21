@@ -3,14 +3,27 @@ from sqlalchemy import text
 from app.db.session import SessionLocal
 from app.db.base import Base
 from app.db.session import engine
+from app.api import budgets
+from app.db.seed import seed_categories
+from app.db.session import SessionLocal
+from app.api import user
+from app.api import category
+from app.api import transaction
+from app.api import dashboard
+from app.api import insight
 
 Base.metadata.create_all(bind=engine)
-
-from app.api import user
+db = SessionLocal()
+seed_categories(db)
+db.close()
 
 app = FastAPI()
 app.include_router(user.router)
-
+app.include_router(budgets.router)
+app.include_router(transaction.router)
+app.include_router(category.router)
+app.include_router(dashboard.router)
+app.include_router(insight.router)
 
 
 @app.get("/")
