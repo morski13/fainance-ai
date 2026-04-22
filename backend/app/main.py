@@ -11,6 +11,8 @@ from app.api import category
 from app.api import transaction
 from app.api import dashboard
 from app.api import insight
+from app.api import vault
+from app.api import receipt
 
 Base.metadata.create_all(bind=engine)
 db = SessionLocal()
@@ -24,6 +26,9 @@ app.include_router(transaction.router)
 app.include_router(category.router)
 app.include_router(dashboard.router)
 app.include_router(insight.router)
+app.include_router(vault.router)
+app.include_router(receipt.router)
+
 
 
 @app.get("/")

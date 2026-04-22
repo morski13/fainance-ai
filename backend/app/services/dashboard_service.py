@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.models.transaction import Transaction
 from app.models.category import Category
 from app.repositories import budget_repository
+from app.repositories import vault_repository
 
 
 def get_dashboard(db: Session, user_id: int):
@@ -45,9 +46,24 @@ def get_dashboard(db: Session, user_id: int):
     # 4. Remaining
     remaining = budget.total_limit - total_spent
 
+    locked_amount = vault_repository.get_total_locked_for_budget(
+        db,
+        budget.id
+    )
+
+    available_to_spend = (
+        budget.total_limit
+        - total_spent
+        - locked_amount
+    )
+
     return {
-        "total_spent": total_spent,
-        "budget_limit": budget.total_limit,
-        "remaining": remaining,
-        "category_breakdown": category_breakdown
+    "total_spent": total_spent,
+    "budget_limit": budget.total_limit,
+    "remaining": remaining,
+
+    "locked_amount": locked_amount,
+    "available_to_spend": available_to_spend,
+
+    "category_breakdown": category_breakdown
     }
