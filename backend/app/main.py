@@ -13,6 +13,8 @@ from app.api import dashboard
 from app.api import insight
 from app.api import vault
 from app.api import receipt
+from fastapi.middleware.cors import CORSMiddleware
+
 
 Base.metadata.create_all(bind=engine)
 db = SessionLocal()
@@ -20,6 +22,7 @@ seed_categories(db)
 db.close()
 
 app = FastAPI()
+
 app.include_router(user.router)
 app.include_router(budgets.router)
 app.include_router(transaction.router)
@@ -29,7 +32,13 @@ app.include_router(insight.router)
 app.include_router(vault.router)
 app.include_router(receipt.router)
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
