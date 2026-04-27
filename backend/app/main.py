@@ -13,6 +13,7 @@ from app.api import dashboard
 from app.api import insight
 from app.api import vault
 from app.api import receipt
+from app.api import optimizer
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -31,6 +32,7 @@ app.include_router(dashboard.router)
 app.include_router(insight.router)
 app.include_router(vault.router)
 app.include_router(receipt.router)
+app.include_router(optimizer.router)
 
 app.add_middleware(
     CORSMiddleware,
