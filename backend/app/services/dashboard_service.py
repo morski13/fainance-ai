@@ -21,6 +21,8 @@ def get_dashboard(db: Session, user_id: int):
             "total_spent": 0,
             "budget_limit": 0,
             "remaining": 0,
+            "locked_amount": 0,
+            "available_to_spend": 0,
             "category_breakdown": []
         }
 

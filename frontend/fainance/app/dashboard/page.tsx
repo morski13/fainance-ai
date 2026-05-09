@@ -6,6 +6,7 @@ import { fetchVaults } from "@/lib/api";
 import Navigation from "@/components/Navigation";
 import SpendingChart from "@/components/SpendingChart";
 import MonthlyTrendChart from "@/components/MonthlyTrendChart";
+import SavingsOptimizer from "@/components/SavingsOptimizer";
 
 const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -350,6 +351,10 @@ const budgetRisk =
                 ))
               )}
             </ul>
+          </div>
+
+          <div className="mt-8">
+            <SavingsOptimizer />
           </div>
         </section>
       </div>

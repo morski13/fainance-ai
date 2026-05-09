@@ -3,6 +3,7 @@ from sqlalchemy import text
 from app.db.session import SessionLocal
 from app.db.base import Base
 from app.db.session import engine
+import app.db.init_models
 from app.api import budgets
 from app.db.seed import seed_categories
 from app.db.session import SessionLocal
